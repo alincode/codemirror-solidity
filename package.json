@@ -8,7 +8,15 @@
     "release": "rm -rf package-lock.json && npm version minor && npm publish",
     "patch": "rm -rf package-lock.json && npm version patch && npm publish"
   },
-  "author": "alincode <alincode@gmail.com>",
+  "keywords": [
+    "solidity",
+    "codemirror"
+  ],
+  "author": {
+    "name": "alincode",
+    "email": "alincode@gmail.com",
+    "url": "https://github.com/alincode"
+  },
   "license": "MIT",
   "dependencies": {
     "codemirror": "^5.47.0"
