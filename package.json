@@ -1,6 +1,6 @@
 {
   "name": "codemirror-solidity",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "codemirror solidity mode",
   "main": "index.js",
   "scripts": {
