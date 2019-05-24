@@ -1,0 +1,19 @@
+{
+  "name": "codemirror-solidity",
+  "version": "0.0.0",
+  "description": "codemirror solidity mode",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify index.js -o solidity.js",
+    "release": "rm -rf package-lock.json && npm version minor && npm publish",
+    "patch": "rm -rf package-lock.json && npm version patch && npm publish"
+  },
+  "author": "alincode <alincode@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "codemirror": "^5.47.0"
+  },
+  "devDependencies": {
+    "browserify": "^16.2.3"
+  }
+}
