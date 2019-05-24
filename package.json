@@ -17,6 +17,7 @@
     "email": "alincode@gmail.com",
     "url": "https://github.com/alincode"
   },
+  "homepage": "https://github.com/alincode/codemirror-solidity#readme",
   "license": "MIT",
   "dependencies": {
     "codemirror": "^5.47.0"
