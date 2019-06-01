@@ -263,8 +263,6 @@ CodeMirror.defineMode('solidity', function(config) {
 
     let cur = stream.current()
 
-    console.log(`current token =  ${cur}, last token = ${state.lastToken}`)
-
     if (state.grammar == 'doc') {
       if (
         natSpecTags.some(function(item) {
@@ -346,18 +344,15 @@ CodeMirror.defineMode('solidity', function(config) {
       }
       //state.parasMode = isNaN(state.parasMode) ? 1 : state.functionLayerCount++;
       state.para += 'functionName'
-      console.log('add para,', state.para)
       return 'functionName'
     }
 
     if (state.lastToken == 'functionName(variable') {
-      console.log('functionName=>', cur)
       state.lastToken = 'functionName('
       return 'parameterValue'
     }
 
     if (state.lastToken == 'returns(variable') {
-      console.log('checking', cur)
       state.lastToken = 'returns('
       return 'parameterValue'
     }
@@ -366,10 +361,8 @@ CodeMirror.defineMode('solidity', function(config) {
       state.lastToken = 'address payable'
     }
     if (state.lastToken == 'contract' || state.lastToken == 'struct') {
-      console.log('0000')
       keywordsContractList[cur] = true
       state.lastToken = null
-      console.log(keywordsContractList)
     }
     if (state.grammar == 'function') {
       return 'parameterValue'
@@ -454,7 +447,6 @@ CodeMirror.defineMode('solidity', function(config) {
       let numberPart = token
         .substr(token.indexOf('d') + 1, token.length)
         .split('x')
-      console.log(numberPart[0] + ' , ' + numberPart[1])
       return (
         numberPart[0] % 8 === 0 && numberPart[0] <= 256 && numberPart[1] <= 80
       )
@@ -484,8 +476,6 @@ CodeMirror.defineMode('solidity', function(config) {
   }
 
   function updateGarmmer(ch, state) {
-    //console.log('======Begin===, ', state.para, ch);
-
     if (ch == ',' && state.para == 'functionName(variable') {
       state.para = 'functionName('
     }
@@ -581,7 +571,6 @@ CodeMirror.defineMode('solidity', function(config) {
     },
 
     indent: function(state, textAfter) {
-      console.log('------indent')
       if (state.tokenize != tokenBase && state.tokenize != null)
         return CodeMirror.Pass
       let ctx = state.context,
