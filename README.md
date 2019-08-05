@@ -4,7 +4,16 @@
 
 A CodeMirror mode for Ethereum Solidity development
 
+![GitHub package version](https://img.shields.io/github/package-json/v/alincode/codemirror-solidity.svg)
+![npm downloads](https://img.shields.io/npm/dt/codemirror-solidity.svg)
+[![Dependency Status](https://img.shields.io/david/alincode/codemirror-solidity.svg?style=flat)](https://david-dm.org/alincode/codemirror-solidity)
+
 ![](demo.png)
+
+## what is CodeMirror?
+
+* <https://codemirror.net/>
+* CodeMirror is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with a number of language modes and addons that implement more advanced editing functionality.
 
 ## Installation instructions
 
