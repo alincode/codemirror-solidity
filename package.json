@@ -4,7 +4,7 @@
   "description": "codemirror solidity mode",
   "main": "index.js",
   "scripts": {
-    "build": "browserify index.js -o solidity.js",
+    "build": "browserify browser.js -o solidity.js",
     "release": "rm -rf package-lock.json && npm version minor && npm publish",
     "patch": "rm -rf package-lock.json && npm version patch && npm publish"
   },
