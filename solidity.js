@@ -3,6 +3,8 @@ window.CodeMirror = require("codemirror");
 require("./index");
 
 },{"./index":2,"codemirror":3}],2:[function(require,module,exports){
+"use strict";
+
 const CodeMirror = require('codemirror')
 
 CodeMirror.defineMode('solidity', function(config) {
