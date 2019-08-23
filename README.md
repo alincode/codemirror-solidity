@@ -1,6 +1,7 @@
 # codemirror solidity mode
 
-[Demo](https://alincode.github.io/codemirror-solidity/)
+* [simple demo](https://alincode.github.io/codemirror-solidity/)
+* [carbon demo](https://carbon.now.sh/kN5PIVd3SAzGLtrfiyyb)
 
 A CodeMirror mode for Ethereum Solidity development
 
