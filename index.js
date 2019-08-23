@@ -1,4 +1,4 @@
-CodeMirror = require('codemirror')
+const CodeMirror = require('codemirror')
 
 CodeMirror.defineMode('solidity', function(config) {
   let indentUnit = config.indentUnit
