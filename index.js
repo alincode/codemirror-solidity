@@ -1,3 +1,5 @@
+"use strict";
+
 const CodeMirror = require('codemirror')
 
 CodeMirror.defineMode('solidity', function(config) {
