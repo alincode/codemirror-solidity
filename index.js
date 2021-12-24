@@ -1,8 +1,8 @@
-"use strict";
+'use strict'
 
 const CodeMirror = require('codemirror')
 
-CodeMirror.defineMode('solidity', function(config) {
+CodeMirror.defineMode('solidity', function (config) {
   let indentUnit = config.indentUnit
 
   // let functionKeyword = 'function'
@@ -161,23 +161,10 @@ CodeMirror.defineMode('solidity', function(config) {
   }
 
   let keywordsAbiEncodeDecodeFunctions = {
-    ['abi']: [
-      'decode',
-      'encodePacked',
-      'encodeWithSelector',
-      'encodeWithSignature',
-      'encode',
-    ],
+    ['abi']: ['decode', 'encodePacked', 'encodeWithSelector', 'encodeWithSignature', 'encode'],
   }
 
-  let keywordsMembersOfAddressType = [
-    'transfer',
-    'send',
-    'balance',
-    'call',
-    'delegatecall',
-    'staticcall',
-  ]
+  let keywordsMembersOfAddressType = ['transfer', 'send', 'balance', 'call', 'delegatecall', 'staticcall']
 
   let natSpecTags = ['title', 'author', 'notice', 'dev', 'param', 'return']
 
@@ -218,7 +205,7 @@ CodeMirror.defineMode('solidity', function(config) {
 
     if (
       ch == '.' &&
-      keywordsMembersOfAddressType.some(function(item) {
+      keywordsMembersOfAddressType.some(function (item) {
         return stream.match(`${item}`)
       })
     )
@@ -267,7 +254,7 @@ CodeMirror.defineMode('solidity', function(config) {
 
     if (state.grammar == 'doc') {
       if (
-        natSpecTags.some(function(item) {
+        natSpecTags.some(function (item) {
           return cur == `@${item}`
         })
       )
@@ -287,8 +274,7 @@ CodeMirror.defineMode('solidity', function(config) {
     }
 
     if (keywordsEtherUnit.propertyIsEnumerable(cur)) return 'etherUnit'
-    if (keywordsContractRelated.propertyIsEnumerable(cur))
-      return 'contractRelated'
+    if (keywordsContractRelated.propertyIsEnumerable(cur)) return 'contractRelated'
     if (
       keywordsControlStructures.propertyIsEnumerable(cur) ||
       keywordsTypeInformation.propertyIsEnumerable(cur) ||
@@ -308,21 +294,20 @@ CodeMirror.defineMode('solidity', function(config) {
 
     if (atoms.propertyIsEnumerable(cur)) return 'atom'
     if (keywordsErrorHandling.propertyIsEnumerable(cur)) return 'errorHandling'
-    if (keywordsMathematicalAndCryptographicFuctions.propertyIsEnumerable(cur))
-      return 'mathematicalAndCryptographic'
+    if (keywordsMathematicalAndCryptographicFuctions.propertyIsEnumerable(cur)) return 'mathematicalAndCryptographic'
 
     if (
       keywordsMoreBlockAndTransactionProperties.propertyIsEnumerable(cur) ||
-      (keywordsBlockAndTransactionProperties[cur] &&
-        keywordsBlockAndTransactionProperties[cur].some(function(item) {
+      (keywordsBlockAndTransactionProperties.hasOwnProperty(cur) &&
+        keywordsBlockAndTransactionProperties[cur].some(function (item) {
           return stream.match(`.${item}`)
         }))
     )
       return 'variable-2'
 
     if (
-      keywordsAbiEncodeDecodeFunctions[cur] &&
-      keywordsAbiEncodeDecodeFunctions[cur].some(function(item) {
+      keywordsAbiEncodeDecodeFunctions.hasOwnProperty(cur) &&
+      keywordsAbiEncodeDecodeFunctions[cur].some(function (item) {
         return stream.match(`.${item}`)
       })
     )
@@ -374,7 +359,7 @@ CodeMirror.defineMode('solidity', function(config) {
   }
 
   function tokenString(quote) {
-    return function(stream, state) {
+    return function (stream, state) {
       let escaped = false,
         next,
         end = false
@@ -408,8 +393,7 @@ CodeMirror.defineMode('solidity', function(config) {
       state.lastToken = null
       return (
         !state.startOfLine &&
-        (stream.match(/[\^{0}][0-9\.]+/) ||
-          stream.match(/[\>\=]+?[\s]*[0-9\.]+[\s]*[\<]?[\s]*[0-9\.]+/))
+        (stream.match(/[\^{0}][0-9\.]+/) || stream.match(/[\>\=]+?[\s]*[0-9\.]+[\s]*[\<]?[\s]*[0-9\.]+/))
       )
     }
   }
@@ -446,12 +430,8 @@ CodeMirror.defineMode('solidity', function(config) {
   function isValidFixed(token) {
     if (token.match(/^[u]?fixed([0-9]+x[0-9]+)?/)) {
       if (token.indexOf('d') + 1 == token.length) return true
-      let numberPart = token
-        .substr(token.indexOf('d') + 1, token.length)
-        .split('x')
-      return (
-        numberPart[0] % 8 === 0 && numberPart[0] <= 256 && numberPart[1] <= 80
-      )
+      let numberPart = token.substr(token.indexOf('d') + 1, token.length).split('x')
+      return numberPart[0] % 8 === 0 && numberPart[0] <= 256 && numberPart[1] <= 80
     }
   }
 
@@ -498,10 +478,7 @@ CodeMirror.defineMode('solidity', function(config) {
       state.lastToken = null
     } else if (ch == '(' && state.lastToken == 'returns') {
       state.lastToken += ch
-    } else if (
-      ch == ')' &&
-      (state.lastToken == 'returns(' || state.lastToken == 'returns(variable')
-    ) {
+    } else if (ch == ')' && (state.lastToken == 'returns(' || state.lastToken == 'returns(variable')) {
       state.lastToken = null
     }
     if (ch == '(' && state.lastToken == 'address') {
@@ -519,25 +496,18 @@ CodeMirror.defineMode('solidity', function(config) {
     this.prev = prev
   }
   function pushContext(state, col, type) {
-    return (state.context = new Context(
-      state.indented,
-      col,
-      type,
-      null,
-      state.context
-    ))
+    return (state.context = new Context(state.indented, col, type, null, state.context))
   }
   function popContext(state) {
     if (!state.context.prev) return
     let t = state.context.type
-    if (t == ')' || t == ']' || t == '}')
-      state.indented = state.context.indented
+    if (t == ')' || t == ']' || t == '}') state.indented = state.context.indented
     return (state.context = state.context.prev)
   }
 
   // Interface
   return {
-    startState: function(basecolumn) {
+    startState: function (basecolumn) {
       return {
         tokenize: null,
         context: new Context((basecolumn || 0) - indentUnit, 0, 'top', false),
@@ -546,7 +516,7 @@ CodeMirror.defineMode('solidity', function(config) {
       }
     },
 
-    token: function(stream, state) {
+    token: function (stream, state) {
       let ctx = state.context
       if (stream.sol()) {
         if (ctx.align == null) ctx.align = false
@@ -572,9 +542,8 @@ CodeMirror.defineMode('solidity', function(config) {
       return style
     },
 
-    indent: function(state, textAfter) {
-      if (state.tokenize != tokenBase && state.tokenize != null)
-        return CodeMirror.Pass
+    indent: function (state, textAfter) {
+      if (state.tokenize != tokenBase && state.tokenize != null) return CodeMirror.Pass
       let ctx = state.context,
         firstChar = textAfter && textAfter.charAt(0)
       if (ctx.type == 'case' && /^(?:case|default)\b/.test(textAfter)) {
