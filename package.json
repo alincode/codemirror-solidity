@@ -2,6 +2,7 @@
   "name": "codemirror-solidity",
   "version": "0.2.5",
   "description": "codemirror solidity mode",
+  "files": ["index.js"],
   "main": "index.js",
   "scripts": {
     "build": "browserify browser.js -o solidity.js",
