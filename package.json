@@ -19,10 +19,11 @@
   },
   "homepage": "https://github.com/alincode/codemirror-solidity#readme",
   "license": "MIT",
-  "dependencies": {
-    "codemirror": "^5.56.0"
+  "peerDependencies": {
+    "codemirror": "5.x"
   },
   "devDependencies": {
-    "browserify": "^16.5.0"
+    "browserify": "^16.5.0",
+    "codemirror": "^5.56.0"
   }
 }
